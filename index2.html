@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Gift Box Surprise</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: #fce4ec;
+      font-family: sans-serif;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 80px solid palevioletred;
+    }
+
+    .container {
+      position: relative;
+      width: 500px;
+      height: 500px;
+      cursor: pointer;
+    }
+
+    .gift-box {
+      width: 100%;
+      height: 100%;
+      background: #e91e63;
+      position: absolute;
+      top: 0;
+      left: 0;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      transition: transform 0.5s ease;
+      z-index: 2;
+    }
+
+    .gift-lid {
+      width: 100%;
+      height: 50px;
+      background: #c2185b;
+      position: absolute;
+      top: -50px;
+      left: 0;
+      border-radius: 10px 10px 0 0;
+      z-index: 3;
+      transition: transform 0.5s ease;
+    }
+
+    .ribbon {
+      width: 40px;
+      height: 100%;
+      background: gold;
+      position: absolute;
+      left: 50%;
+      top: 0;
+      transform: translateX(-50%);
+    }
+
+    .surprise-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 10px;
+      display: none;
+      z-index: 1;
+    }
+
+    .open .gift-box {
+      transform: scale(0);
+    }
+
+    .open .gift-lid {
+      transform: translateY(-150px) rotate(-20deg);
+    }
+
+    .open .surprise-img {
+      display: block;
+      animation: fadeIn 0.6s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    /* Heart styles */
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: red;
+      transform: rotate(45deg);
+      animation: fall 4s linear forwards;
+      opacity: 0.8;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: red;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+
+    @keyframes fall {
+      0% {
+        top: 50%;
+        left: 50%;
+        opacity: 1;
+        transform: rotate(45deg) translate(-50%, -50%);
+      }
+      100% {
+        top: -200px;
+        left: calc(50% + 100px - 200px * random());
+        opacity: 0;
+        transform: rotate(45deg) translate(-50%, -500px);
+      }
+    }
+
+    footer {
+      border: 30px solid pink;
+      font-size: xx-large;
+      font-weight: 400;
+      margin: 400px;
+    }
+
+    img {
+      width: 800px;
+      height: 800px;
+    }
+    p{
+        margin-top:600px ;
+        font-weight: 400;
+        font-style: italic;
+
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container" id="giftBox">
+    <div class="gift-lid"></div>
+    <div class="gift-box">
+      <div class="ribbon"></div>
+    </div>
+    <img src="telegram-cloud-photo-size-5-6323211528353990609-y.jpg" alt="Surprise!" class="surprise-img" />
+  </div>
+  <p>tap tap for ❤️love</p>
+
+  <script>
+    const giftBox = document.getElementById('giftBox');
+
+    giftBox.addEventListener('click', function () {
+      giftBox.classList.add('open');
+      startHeartAnimation();
+    });
+
+    function startHeartAnimation() {
+      for (let i = 0; i < 30; i++) {
+        createHeart();
+      }
+    }
+
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+
+      // Random position and animation delay
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.top = "100%";
+      heart.style.animationDuration = (2 + Math.random() * 2) + "s";
+      heart.style.animationDelay = Math.random() * 1 + "s";
+
+      document.body.appendChild(heart);
+
+      // Remove the heart after animation
+      setTimeout(() => {
+        heart.remove();
+      }, 5000);
+    }
+  </script>
+
+</body>
+</html>

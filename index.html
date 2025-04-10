@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Falling Hearts Animation</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: #fff;
+      overflow: hidden;
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background:linear-gradient(pink, red,coral);
+      transform: rotate(45deg);
+      animation: fall 4s linear infinite;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background:linear-gradient(pink, red,coral);
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+    img{
+        height: 500px;
+        width: 500px;
+        margin-left: 500px;
+    }
+    h1{
+        margin: 40px;
+        font-style: italic;
+        color: burlywood;
+        text-decoration-line: underline;
+    }
+    footer{
+        border: 30px solid pink;
+        font-size: xx-large;
+        font-weight: 400;
+
+    }
+    body{
+        border: 80px solid palevioletred;
+    }
+
+    @keyframes fall {
+      0% {
+        top: -10%;
+        opacity: 1;
+        transform: rotate(45deg) translateX(0);
+      }
+      100% {
+        top: 110%;
+        opacity: 0;
+        transform: rotate(45deg) translateX(100px);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="heart-container">
+    <a href="index2.html"><img id="in" src="im.gif"></a>
+    <h1>Click on the fishy fish</h1>
+  </div>
+  
+
+  <script>
+    // Wait for DOM to load
+    window.onload = function () {
+      const container = document.querySelector('.heart-container');
+
+      function createHeart() {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = (2 + Math.random() * 3) + "s";
+        container.appendChild(heart);
+
+        setTimeout(() => {
+          heart.remove();
+        }, 5000);
+      }
+
+      setInterval(createHeart, 300);
+    };
+    
+  </script>
+  <footer>For Aaduu❤️</footer>
+</body>
+</html>
